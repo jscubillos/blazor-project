@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Project.Domain", "Bl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Project.Common", "Blazor.Project.Common\Blazor.Project.Common.csproj", "{E8D4F518-BC77-4632-BD92-7B2764081D63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Project.Infrastructure", "Blazor.Project.Infrastructure\Blazor.Project.Infrastructure.csproj", "{1A3651C4-770A-4998-83FF-C87B34CAEAE1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blazor.Project.Infrastructure", "Blazor.Project.Infrastructure\Blazor.Project.Infrastructure.csproj", "{7326F34D-7F4E-4606-B8A0-4B6E4875B218}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,9 +32,9 @@ Global
 		{E8D4F518-BC77-4632-BD92-7B2764081D63}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8D4F518-BC77-4632-BD92-7B2764081D63}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8D4F518-BC77-4632-BD92-7B2764081D63}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A3651C4-770A-4998-83FF-C87B34CAEAE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A3651C4-770A-4998-83FF-C87B34CAEAE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A3651C4-770A-4998-83FF-C87B34CAEAE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A3651C4-770A-4998-83FF-C87B34CAEAE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7326F34D-7F4E-4606-B8A0-4B6E4875B218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7326F34D-7F4E-4606-B8A0-4B6E4875B218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7326F34D-7F4E-4606-B8A0-4B6E4875B218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7326F34D-7F4E-4606-B8A0-4B6E4875B218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

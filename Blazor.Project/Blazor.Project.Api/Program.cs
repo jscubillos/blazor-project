@@ -14,7 +14,7 @@ builder.Services.Configure<RouteOptions>(options =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//builder.AddBlazorProject();
+builder.Services.AddBlazorProject();
 
 var app = builder.Build();
 

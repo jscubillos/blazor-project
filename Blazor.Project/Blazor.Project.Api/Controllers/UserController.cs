@@ -1,3 +1,4 @@
+using Blazor.Project.Application.Interfaces;
 using Blazor.Project.Application.Users.Commands.Register;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,5 +14,4 @@ public class UserController(IRegisterUserCommand registerUserCommand) : Controll
         registerUserCommand.Execute(inputModel);
         return Ok();
     }
-    
 }
