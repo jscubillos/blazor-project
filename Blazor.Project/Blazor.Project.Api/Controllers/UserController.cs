@@ -1,4 +1,3 @@
-using Blazor.Project.Application.Interfaces;
 using Blazor.Project.Application.Users.Commands.Register;
 using Microsoft.AspNetCore.Mvc;
 

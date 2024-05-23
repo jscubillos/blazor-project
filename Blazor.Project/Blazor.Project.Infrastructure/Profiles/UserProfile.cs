@@ -1,4 +1,5 @@
 using AutoMapper;
+using Blazor.Project.Application.Users.Commands.Login;
 using Blazor.Project.Application.Users.Commands.Register;
 using Blazor.Project.Domain.Users;
 
@@ -9,5 +10,7 @@ public class UserProfile : Profile
     public UserProfile()
     {
         CreateMap<RegisterUserInputModel, User>();
+        
+        CreateMap<User, LoginUserOutputModel>();
     }
 }
