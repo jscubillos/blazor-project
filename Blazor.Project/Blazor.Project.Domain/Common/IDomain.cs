@@ -1,4 +1,4 @@
-namespace Blazor.Project.Domain.Interfaces;
+namespace Blazor.Project.Domain.Common;
 
 public interface IDomain
 {

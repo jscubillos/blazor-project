@@ -4,5 +4,5 @@ namespace Blazor.Project.Application.Interfaces;
 
 public interface IUserRepository : IRepository
 {
-    User GetByEmail(string userEmail);
+    User? GetByEmail(string email);
 }

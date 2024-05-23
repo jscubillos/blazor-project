@@ -1,17 +1,15 @@
 using Blazor.Project.Application.Interfaces;
 using Blazor.Project.Domain.Users;
+using Microsoft.Data.Sqlite;
 
 namespace Blazor.Project.Infrastructure.Repositories;
 
-public class UserRepository : IUserRepository
+public class UserRepository(SqliteConnection connection, IDatabaseRepository databaseRepository)
+    : Repository(connection, databaseRepository)
+        , IUserRepository
 {
-    public void Add<T>(T entity) where T : class
+    public User? GetByEmail(string email)
     {
-        throw new NotImplementedException();
-    }
-
-    public User GetByEmail(string userEmail)
-    {
-        throw new NotImplementedException();
+        return null;
     }
 }

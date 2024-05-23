@@ -1,14 +1,15 @@
-using Blazor.Project.Domain.Interfaces;
+using Blazor.Project.Common.Extensions;
+using Blazor.Project.Domain.Common;
 
 namespace Blazor.Project.Domain.Users;
 
-public class User : IDomain
+public class User : Dominio
 {
-    public required string Name { get; set; }
-    public required string Email { get; set; }
-    public required string Password { get; set; }
+    public required string Name { get; init; }
+    public required string Email { get; init; }
+    public required string Password { get; init; }
     
-    public void Validate()
+    public override void Validate()
     {
         ValidateName(Name);
         ValidateEmail(Email);
@@ -17,17 +18,23 @@ public class User : IDomain
 
     private static void ValidateName(string name)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrEmpty(name))
+            throw new ApplicationException("Name is required");
     }
     
     private static void ValidateEmail(string email)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrEmpty(email))
+            throw new ApplicationException("Email is required");
+        
+        if(!email.ValidEmail())
+            throw new ApplicationException("Invalid email");
     }
     
     private static void ValidatePassword(string password)
     {
-        throw new NotImplementedException();
+        if (string.IsNullOrEmpty(password))
+            throw new ApplicationException("Password is required");
     }
     
 }

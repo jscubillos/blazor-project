@@ -11,8 +11,11 @@ public static class IocDependencyInjection
     public static void AddIoCLibrary(this IServiceCollection services)
     {   
         /*TODO: tentar substituir pelo Lamar ou StructureMap*/
+        
+        //Services
         services.AddScoped<IMapperService, MapperService>();
-        services.AddScoped<IUserRepository, UserRepository>();
+        
+        //Application
         services.AddScoped<IRegisterUserCommand, RegisterUserCommand>();
     }
 }

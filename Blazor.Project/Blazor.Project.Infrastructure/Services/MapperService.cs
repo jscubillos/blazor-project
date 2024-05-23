@@ -1,4 +1,5 @@
 using Blazor.Project.Application.Interfaces;
+using Blazor.Project.Infrastructure.Profiles;
 using AutoMapper;
 
 namespace Blazor.Project.Infrastructure.Services;
@@ -39,6 +40,9 @@ public class MapperService : IMapperService
 
     private IEnumerable<Profile> LoadProfiles()
     {
-        return new List<Profile>();
+        return new List<Profile>
+        {
+            new UserProfile()
+        };
     }
 }
