@@ -1,11 +1,10 @@
 using Blazor.Project.Application.Interfaces;
-using Dapper;
 using Dapper.Contrib.Extensions;
 using Microsoft.Data.Sqlite;
 
 namespace Blazor.Project.Infrastructure.Repositories;
 
-public class Repository : IRepository
+public class Repository<T> : IRepository<T> where T : class
 {
         private readonly SqliteConnection _connection;
 
@@ -15,15 +14,13 @@ public class Repository : IRepository
             databaseRepository.Initialize();
         }
 
-    public void Add<T>(T entity) where T : class
+    public virtual void Add(T entity)
     {
-        // using var connection = new SqliteConnection(_connectionString);
-        // connection.Open();
-        // connection.Execute(entity);
-
-        // var sql = $"INSERT INTO {typeof(T).Name}s VALUES (@Entity)";
-        // _connection.Execute(sql, new { Entity = entity });
-
         _connection.Insert(entity);
+    }
+    
+    public virtual IEnumerable<T> GetAll()
+    {
+        return _connection.GetAll<T>();
     }
 }
