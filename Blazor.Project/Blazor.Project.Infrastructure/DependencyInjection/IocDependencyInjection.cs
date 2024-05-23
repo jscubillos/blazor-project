@@ -1,6 +1,5 @@
 using Blazor.Project.Application.Interfaces;
 using Blazor.Project.Application.Users.Commands.Register;
-using Blazor.Project.Infrastructure.Repositories;
 using Blazor.Project.Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
 

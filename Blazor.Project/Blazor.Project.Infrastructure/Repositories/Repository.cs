@@ -23,4 +23,9 @@ public class Repository<T> : IRepository<T> where T : class
     {
         return _connection.GetAll<T>();
     }
+    
+    public virtual T GetById(int id)
+    {
+        return _connection.Get<T>(id);
+    }
 }
