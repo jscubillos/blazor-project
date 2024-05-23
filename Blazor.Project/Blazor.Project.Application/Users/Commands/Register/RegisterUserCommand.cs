@@ -6,12 +6,16 @@ namespace Blazor.Project.Application.Users.Commands.Register;
 
 public class RegisterUserCommand(
     IMapperService mapperService,
+    IPasswordService passwordService,
     IUserRepository userRepository) : IRegisterUserCommand
 {
     public void Execute(RegisterUserInputModel inputModel)
     {
         Validate(inputModel);
+        
         var user = mapperService.Map<RegisterUserInputModel, User>(inputModel);
+        user.PasswordSalt = passwordService.GenerateSalt();
+        user.PasswordHash = passwordService.HashPassword(inputModel.Password, user.PasswordSalt);
         userRepository.Add(user);
     }
     

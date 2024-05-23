@@ -17,7 +17,8 @@ public class DatabaseRepository(SqliteConnection connection) : IDatabaseReposito
                 Id INTEGER PRIMARY KEY,
                 Name TEXT NOT NULL,
                 Email TEXT NOT NULL,
-                Password TEXT NOT NULL
+                PasswordHash TEXT NOT NULL,
+                PasswordSalt TEXT NOT NULL
             );
         ";
         command.ExecuteNonQuery();

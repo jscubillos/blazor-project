@@ -12,6 +12,6 @@ public class UserController(IRegisterUserCommand registerUserCommand) : Controll
     public IActionResult RegisterUser([FromBody] RegisterUserInputModel inputModel)
     {
         registerUserCommand.Execute(inputModel);
-        return Ok();
+        return Created();
     }
 }
