@@ -1,8 +1,5 @@
+using Blazor.Project.Application.Interfaces;
+
 namespace Blazor.Project.Application.Users.Commands.Register;
 
-public interface IRegisterUserCommand
-{
-    void Execute(RegisterUserInputModel inputModel);
-    
-    void Validate(RegisterUserInputModel inputModel);
-}
+public interface IRegisterUserCommand : ICommand<RegisterUserInputModel>;

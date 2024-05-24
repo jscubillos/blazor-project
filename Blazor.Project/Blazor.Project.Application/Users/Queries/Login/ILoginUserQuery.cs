@@ -1,8 +1,5 @@
+using Blazor.Project.Application.Interfaces;
+
 namespace Blazor.Project.Application.Users.Queries.Login;
 
-public interface ILoginUserQuery
-{
-    LoginUserOutputModel Execute(LoginUserInputModel inputModel);
-    
-    void Validate(LoginUserInputModel inputModel);
-}
+public interface ILoginUserQuery : IQuery<LoginUserInputModel, LoginUserOutputModel>;

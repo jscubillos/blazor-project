@@ -15,6 +15,9 @@ public class RegisterSpecialityCommand(IMapperService mapperService, ISpeciality
     public void Validate(RegisterSpecialityInputModel inputModel)
     {
         if(string.IsNullOrEmpty(inputModel.Name))
-            throw new ArgumentException("Name is required");
+            throw new ApplicationException("Name is required");
+        
+        if(specialityRepository.GetByName(inputModel.Name) != null)
+            throw new ApplicationException("Speciality already exists");
     }
 }
