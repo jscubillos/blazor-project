@@ -23,7 +23,9 @@ public class AuthenticationService(IConfiguration configuration) : IAuthenticati
                 new Claim(ClaimTypes.Email, user.Email)
             }),
             Expires = DateTime.UtcNow.AddHours(1),
-            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+            Issuer = configuration["Jwt:Issuer"],
+            Audience = configuration["Jwt:Audience"]
         };
         var securityToken = tokenHandler.CreateToken(tokenDescriptor);
         var token =  tokenHandler.WriteToken(securityToken);

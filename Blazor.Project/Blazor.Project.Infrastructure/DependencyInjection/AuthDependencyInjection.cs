@@ -27,7 +27,5 @@ public static class AuthDependencyInjection
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configurationManager["Jwt:Key"]))
             };
         });
-
-        // Rest of the method
     }
 }
