@@ -1,4 +1,5 @@
 using Blazor.Project.Application.Interfaces;
+using Blazor.Project.Application.Specialities.Commands.Delete;
 using Blazor.Project.Application.Specialities.Commands.Register;
 using Blazor.Project.Application.Specialities.Commands.Update;
 using Blazor.Project.Application.Specialities.Queries.Get;
@@ -26,6 +27,7 @@ public static class IocDependencyInjection
         services.AddScoped<ILoginUserQuery, LoginUserQuery>();
         services.AddScoped<IRegisterSpecialityCommand, RegisterSpecialityCommand>();
         services.AddScoped<IUpdateSpecialityCommand, UpdateSpecialityCommand>();
+        services.AddScoped<IDeleteSpecialityCommand, DeleteSpecialityCommand>();
         services.AddScoped<IGetSpecialityQuery, GetSpecialityQuery>();
         services.AddScoped<IGetAllSpecialityQuery, GetAllSpecialityQuery>();
     }

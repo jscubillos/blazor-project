@@ -1,3 +1,4 @@
+using Blazor.Project.Application.Specialities.Commands.Delete;
 using Blazor.Project.Application.Specialities.Commands.Register;
 using Blazor.Project.Application.Specialities.Commands.Update;
 using Blazor.Project.Application.Specialities.Queries.Get;
@@ -10,7 +11,12 @@ namespace Blazor.Project.Api.Controllers;
 [Authorize]
 [ApiController]
 [Route("[controller]")]
-public class SpecialityController(IRegisterSpecialityCommand registerSpecialityCommand, IUpdateSpecialityCommand updateSpecialityCommand, IGetSpecialityQuery getSpecialityQuery,  IGetAllSpecialityQuery getAllSpecialityQuery) : ControllerBase
+public class SpecialityController(
+    IRegisterSpecialityCommand registerSpecialityCommand,
+    IUpdateSpecialityCommand updateSpecialityCommand,
+    IDeleteSpecialityCommand deleteSpecialityCommand,
+    IGetSpecialityQuery getSpecialityQuery, 
+    IGetAllSpecialityQuery getAllSpecialityQuery) : ControllerBase
 {
     [HttpPost]
     public IActionResult Register([FromBody] RegisterSpecialityInputModel inputModel)
@@ -23,6 +29,13 @@ public class SpecialityController(IRegisterSpecialityCommand registerSpecialityC
     public IActionResult Update([FromBody] UpdateSpecialityInputModel inputModel)
     {
         updateSpecialityCommand.Execute(inputModel);
+        return NoContent();
+    }
+    
+    [HttpDelete("{id}")]
+    public IActionResult Delete([FromRoute] int id)
+    {
+        deleteSpecialityCommand.Execute(id);
         return NoContent();
     }
     

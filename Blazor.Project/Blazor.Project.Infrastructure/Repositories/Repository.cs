@@ -24,6 +24,11 @@ public class Repository<T> : IRepository<T> where T : class
         _connection.Update(entity);
     }
     
+    public virtual void Delete(T entity)
+    {
+        _connection.Delete(entity);
+    }
+    
     public virtual IEnumerable<T> GetAll()
     {
         return _connection.GetAll<T>();

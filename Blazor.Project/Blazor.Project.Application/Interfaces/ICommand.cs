@@ -1,6 +1,6 @@
 namespace Blazor.Project.Application.Interfaces;
 
-public interface ICommand<in T> where T : class
+public interface ICommand<in T>
 {
     void Execute(T inputModel);
     
