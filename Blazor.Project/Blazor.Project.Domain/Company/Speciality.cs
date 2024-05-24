@@ -6,5 +6,5 @@ namespace Blazor.Project.Domain.Company;
 [Table("Specialities")]
 public class Speciality : Entity
 {
-    public required string Name { get; init; }
+    public required string Name { get; set; }
 }

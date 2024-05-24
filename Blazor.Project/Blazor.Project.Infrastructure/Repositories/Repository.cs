@@ -19,6 +19,11 @@ public class Repository<T> : IRepository<T> where T : class
         _connection.Insert(entity);
     }
     
+    public virtual void Update(T entity)
+    {
+        _connection.Update(entity);
+    }
+    
     public virtual IEnumerable<T> GetAll()
     {
         return _connection.GetAll<T>();

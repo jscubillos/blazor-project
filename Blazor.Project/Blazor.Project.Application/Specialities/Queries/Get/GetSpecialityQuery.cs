@@ -15,7 +15,7 @@ public class GetSpecialityQuery(IMapperService mapperService, ISpecialityReposit
 
     public void Validate(GetSpecialityInputModel inputModel)
     {
-        if(inputModel.Id == 0)
-            throw new ApplicationException("Id must be informed");
+        if(inputModel.Id <= 0)
+            throw new ApplicationException("Id is required");
     }
 }
