@@ -28,14 +28,19 @@ public class Repository<T> : IRepository<T> where T : class
     {
         _connection.Delete(entity);
     }
-    
+
     public virtual IEnumerable<T> GetAll()
     {
         return _connection.GetAll<T>();
     }
     
-    public virtual T GetById(int id)
+    public virtual T? GetById(int id)
     {
         return _connection.Get<T>(id);
+    }
+
+    public virtual T? GetById(T entity)
+    {
+        return _connection.Get<T>(entity);
     }
 }

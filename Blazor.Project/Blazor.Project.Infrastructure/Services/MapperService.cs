@@ -47,6 +47,7 @@ public class MapperService : IMapperService
             new SpecialityProfile(),
             new DoctorProfile(),
             new HospitalProfile(),
+            new HospitalDoctorProfile()
         };
     }
 }

@@ -15,4 +15,16 @@
       <ProjectReference Include="..\Blazor.Project.Domain\Blazor.Project.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="HospitalsDoctors\Queries\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="HospitalsDoctors\Queries\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="HospitalsDoctors\Queries\**" />
+    </ItemGroup>
+
 </Project>

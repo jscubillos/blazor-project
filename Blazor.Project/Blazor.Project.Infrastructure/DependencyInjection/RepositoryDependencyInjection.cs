@@ -25,5 +25,6 @@ public static class RepositoryDependencyInjection
         services.AddScoped<IAddressRepository, AddressRepository>();
         services.AddScoped<IDoctorRepository, DoctorRepository>();
         services.AddScoped<IHospitalRepository, HospitalRepository>();
+        services.AddScoped<IHospitalDoctorRepository, HospitalDoctorRepository>();
     }
 }
