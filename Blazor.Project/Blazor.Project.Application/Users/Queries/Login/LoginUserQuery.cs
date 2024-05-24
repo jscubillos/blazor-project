@@ -2,9 +2,9 @@ using Blazor.Project.Application.Interfaces;
 using Blazor.Project.Common.Extensions;
 using Blazor.Project.Domain.Authentication;
 
-namespace Blazor.Project.Application.Users.Commands.Login;
+namespace Blazor.Project.Application.Users.Queries.Login;
 
-public class LoginUserCommand(IAuthenticationService authenticationService, IMapperService mapperService, IPasswordService passwordService, IUserRepository userRepository) : ILoginUserCommand
+public class LoginUserQuery(IAuthenticationService authenticationService, IMapperService mapperService, IPasswordService passwordService, IUserRepository userRepository) : ILoginUserQuery
 {
     public LoginUserOutputModel Execute(LoginUserInputModel inputModel)
     {

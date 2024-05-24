@@ -1,6 +1,6 @@
 using Blazor.Project.Application.Interfaces;
-using Blazor.Project.Application.Users.Commands.Login;
 using Blazor.Project.Application.Users.Commands.Register;
+using Blazor.Project.Application.Users.Queries.Login;
 using Blazor.Project.Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,6 +19,6 @@ public static class IocDependencyInjection
         
         //Application
         services.AddScoped<IRegisterUserCommand, RegisterUserCommand>();
-        services.AddScoped<ILoginUserCommand, LoginUserCommand>();
+        services.AddScoped<ILoginUserQuery, LoginUserQuery>();
     }
 }

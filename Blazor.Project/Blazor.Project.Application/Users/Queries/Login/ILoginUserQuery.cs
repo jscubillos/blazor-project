@@ -1,6 +1,6 @@
-namespace Blazor.Project.Application.Users.Commands.Login;
+namespace Blazor.Project.Application.Users.Queries.Login;
 
-public interface ILoginUserCommand
+public interface ILoginUserQuery
 {
     LoginUserOutputModel Execute(LoginUserInputModel inputModel);
     

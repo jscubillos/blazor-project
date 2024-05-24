@@ -1,4 +1,4 @@
-namespace Blazor.Project.Application.Users.Commands.Login;
+namespace Blazor.Project.Application.Users.Queries.Login;
 
 public class LoginUserOutputModel
 {

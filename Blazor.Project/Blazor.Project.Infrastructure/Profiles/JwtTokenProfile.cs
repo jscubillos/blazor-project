@@ -1,5 +1,5 @@
 using AutoMapper;
-using Blazor.Project.Application.Users.Commands.Login;
+using Blazor.Project.Application.Users.Queries.Login;
 using Blazor.Project.Domain.Authentication;
 
 namespace Blazor.Project.Infrastructure.Profiles;
