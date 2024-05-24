@@ -1,4 +1,5 @@
 using Blazor.Project.Application.Interfaces;
+using Blazor.Project.Domain.Company;
 using Blazor.Project.Domain.Users;
 using Blazor.Project.Infrastructure.Repositories;
 using Microsoft.Data.Sqlite;
@@ -16,8 +17,10 @@ public static class RepositoryDependencyInjection
         services.AddSingleton(new SqliteConnection(configurationManager.GetConnectionString("DefaultConnection")));
         services.AddTransient<IDatabaseRepository, DatabaseRepository>();
         services.AddTransient<IRepository<User>, Repository<User>>();
+        services.AddTransient<IRepository<Speciality>, Repository<Speciality>>();
         
         //Repositories
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<ISpecialityRepository, SpecialityRepository>();
     }
 }

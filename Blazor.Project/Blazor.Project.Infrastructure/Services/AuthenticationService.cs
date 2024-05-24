@@ -14,7 +14,7 @@ public class AuthenticationService(IConfiguration configuration) : IAuthenticati
     public JwtToken GenerateJwtToken(User user)
     {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(configuration["Jwt:Key"]);
+        var key = Encoding.ASCII.GetBytes(configuration["Jwt:Key"]!);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new[]

@@ -24,7 +24,7 @@ public static class AuthDependencyInjection
                 ValidateIssuerSigningKey = true,
                 ValidIssuer = configurationManager["Jwt:Issuer"],
                 ValidAudience = configurationManager["Jwt:Audience"],
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configurationManager["Jwt:Key"]))
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configurationManager["Jwt:Key"]!))
             };
         });
     }

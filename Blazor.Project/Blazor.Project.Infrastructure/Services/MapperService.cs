@@ -43,7 +43,8 @@ public class MapperService : IMapperService
         return new List<Profile>
         {
             new UserProfile(),
-            new JwtTokenProfile()
+            new JwtTokenProfile(),
+            new SpecialityProfile()
         };
     }
 }

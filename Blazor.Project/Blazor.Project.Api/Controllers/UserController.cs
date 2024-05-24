@@ -9,7 +9,7 @@ namespace Blazor.Project.Api.Controllers;
 [Route("[controller]")]
 public class UserController(IRegisterUserCommand registerUserCommand) : ControllerBase
 {   
-    [HttpPost]
+    [HttpPost, AllowAnonymous]
     public IActionResult RegisterUser([FromBody] RegisterUserInputModel inputModel)
     {
         registerUserCommand.Execute(inputModel);
