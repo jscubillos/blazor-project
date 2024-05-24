@@ -1,3 +1,8 @@
+using Blazor.Project.Application.Doctors.Commands.Delete;
+using Blazor.Project.Application.Doctors.Commands.Register;
+using Blazor.Project.Application.Doctors.Commands.Update;
+using Blazor.Project.Application.Doctors.Queries.Get;
+using Blazor.Project.Application.Doctors.Queries.GetAll;
 using Blazor.Project.Application.Interfaces;
 using Blazor.Project.Application.Specialities.Commands.Delete;
 using Blazor.Project.Application.Specialities.Commands.Register;
@@ -30,5 +35,10 @@ public static class IocDependencyInjection
         services.AddScoped<IDeleteSpecialityCommand, DeleteSpecialityCommand>();
         services.AddScoped<IGetSpecialityQuery, GetSpecialityQuery>();
         services.AddScoped<IGetAllSpecialityQuery, GetAllSpecialityQuery>();
+        services.AddScoped<IRegisterDoctorCommand, RegisterDoctorCommand>();
+        services.AddScoped<IUpdateDoctorCommand, UpdateDoctorCommand>();
+        services.AddScoped<IDeleteDoctorCommand, DeleteDoctorCommand>();
+        services.AddScoped<IGetDoctorQuery, GetDoctorQuery>();
+        services.AddScoped<IGetAllDoctorQuery, GetAllDoctorQuery>();
     }
 }

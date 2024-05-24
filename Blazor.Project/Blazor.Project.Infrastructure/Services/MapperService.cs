@@ -44,7 +44,8 @@ public class MapperService : IMapperService
         {
             new UserProfile(),
             new JwtTokenProfile(),
-            new SpecialityProfile()
+            new SpecialityProfile(),
+            new DoctorProfile()
         };
     }
 }

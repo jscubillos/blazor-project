@@ -14,9 +14,9 @@ public class Repository<T> : IRepository<T> where T : class
             databaseRepository.Initialize();
         }
 
-    public virtual void Add(T entity)
+    public virtual int Add(T entity)
     {
-        _connection.Insert(entity);
+        return (int)_connection.Insert(entity);
     }
     
     public virtual void Update(T entity)

@@ -2,7 +2,7 @@ namespace Blazor.Project.Application.Interfaces;
 
 public interface IRepository<T> where T : class
 {
-    void Add(T entity) ;
+    int Add(T entity) ;
     void Update(T entity);
     void Delete(T entity);
     IEnumerable<T> GetAll();

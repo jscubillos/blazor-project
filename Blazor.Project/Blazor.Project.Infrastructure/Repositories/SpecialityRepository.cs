@@ -8,9 +8,11 @@ namespace Blazor.Project.Infrastructure.Repositories;
 public class SpecialityRepository(SqliteConnection connection, IDatabaseRepository databaseRepository)
     : Repository<Speciality>(connection, databaseRepository), ISpecialityRepository
 {
+    private readonly SqliteConnection _connection = connection;
+
     public Speciality? GetByName(string name)
     {
         const string query = $"SELECT * FROM Specialities WHERE Name = @Name";
-        return connection.QueryFirstOrDefault<Speciality>(query, new { Name = name });
+        return _connection.QueryFirstOrDefault<Speciality>(query, new { Name = name });
     }
 }
