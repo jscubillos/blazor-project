@@ -1,10 +1,10 @@
 using Blazor.Project.Application.Interfaces;
 using Blazor.Project.Common.Extensions;
-using Blazor.Project.Domain.Users;
+using Blazor.Project.Domain.Authentication;
 
 namespace Blazor.Project.Application.Users.Commands.Login;
 
-public class LoginUserCommand(IMapperService mapperService, IPasswordService passwordService, IUserRepository userRepository) : ILoginUserCommand
+public class LoginUserCommand(IAuthenticationService authenticationService, IMapperService mapperService, IPasswordService passwordService, IUserRepository userRepository) : ILoginUserCommand
 {
     public LoginUserOutputModel Execute(LoginUserInputModel inputModel)
     {
@@ -15,9 +15,9 @@ public class LoginUserCommand(IMapperService mapperService, IPasswordService pas
         
         if(!passwordService.VerifyPassword(inputModel.Password, user.PasswordHash, user.PasswordSalt))
             throw new ApplicationException("Invalid password");
-        
-        var token = mapperService.Map<User, LoginUserOutputModel>(user);
-        return token;
+
+        var jwtToken = authenticationService.GenerateJwtToken(user);
+        return mapperService.Map<JwtToken, LoginUserOutputModel>(jwtToken);
     }
 
     public void Validate(LoginUserInputModel inputModel)

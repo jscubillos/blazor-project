@@ -9,5 +9,6 @@ public static class BlazorProjectDependencyInjection
     {
         services.AddIoCLibrary();
         services.AddIoCRepository(configurationManager);
+        services.AddIoCAuthentication(configurationManager);
     }
 }

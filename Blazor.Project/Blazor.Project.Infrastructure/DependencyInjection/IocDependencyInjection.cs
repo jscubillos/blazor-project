@@ -13,6 +13,7 @@ public static class IocDependencyInjection
         /*TODO: tentar substituir pelo Lamar ou StructureMap*/
         
         //Services
+        services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IMapperService, MapperService>();
         services.AddScoped<IPasswordService, PasswordService>();
         
