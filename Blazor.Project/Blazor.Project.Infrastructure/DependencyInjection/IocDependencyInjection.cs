@@ -1,5 +1,7 @@
 using Blazor.Project.Application.Interfaces;
 using Blazor.Project.Application.Specialities.Commands.Register;
+using Blazor.Project.Application.Specialities.Queries.Get;
+using Blazor.Project.Application.Specialities.Queries.GetAll;
 using Blazor.Project.Application.Users.Commands.Register;
 using Blazor.Project.Application.Users.Queries.Login;
 using Blazor.Project.Domain.Company;
@@ -23,5 +25,7 @@ public static class IocDependencyInjection
         services.AddScoped<IRegisterUserCommand, RegisterUserCommand>();
         services.AddScoped<ILoginUserQuery, LoginUserQuery>();
         services.AddScoped<IRegisterSpecialityCommand, RegisterSpecialityCommand>();
+        services.AddScoped<IGetSpecialityQuery, GetSpecialityQuery>();
+        services.AddScoped<IGetAllSpecialityQuery, GetAllSpecialityQuery>();
     }
 }
