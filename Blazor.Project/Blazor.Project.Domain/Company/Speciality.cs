@@ -1,5 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Blazor.Project.Domain.Common;
-using Dapper.Contrib.Extensions;
 
 namespace Blazor.Project.Domain.Company;
 
@@ -7,7 +7,4 @@ namespace Blazor.Project.Domain.Company;
 public class Speciality : Entity
 {
     public required string Name { get; init; }
-    
-    [Computed]
-    public virtual List<Doctor>? Doctors { get; init; }
 }
