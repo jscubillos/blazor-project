@@ -10,6 +10,9 @@ public class GetSpecialityQuery(IMapperService mapperService, ISpecialityReposit
     {
         Validate(inputModel);
         var speciality = specialityRepository.GetById(inputModel.Id);
+        if(speciality == null)
+            throw new ApplicationException("Speciality not found");
+        
         return mapperService.Map<Speciality, GetSpecialityOutputModel>(speciality);
     }
 
