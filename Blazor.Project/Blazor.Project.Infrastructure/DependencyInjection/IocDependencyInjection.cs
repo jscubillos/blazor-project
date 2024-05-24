@@ -3,6 +3,11 @@ using Blazor.Project.Application.Doctors.Commands.Register;
 using Blazor.Project.Application.Doctors.Commands.Update;
 using Blazor.Project.Application.Doctors.Queries.Get;
 using Blazor.Project.Application.Doctors.Queries.GetAll;
+using Blazor.Project.Application.Hospitals.Commands.Delete;
+using Blazor.Project.Application.Hospitals.Commands.Register;
+using Blazor.Project.Application.Hospitals.Commands.Update;
+using Blazor.Project.Application.Hospitals.Queries.Get;
+using Blazor.Project.Application.Hospitals.Queries.GetAll;
 using Blazor.Project.Application.Interfaces;
 using Blazor.Project.Application.Specialities.Commands.Delete;
 using Blazor.Project.Application.Specialities.Commands.Register;
@@ -40,5 +45,10 @@ public static class IocDependencyInjection
         services.AddScoped<IDeleteDoctorCommand, DeleteDoctorCommand>();
         services.AddScoped<IGetDoctorQuery, GetDoctorQuery>();
         services.AddScoped<IGetAllDoctorQuery, GetAllDoctorQuery>();
+        services.AddScoped<IRegisterHospitalCommand, RegisterHospitalCommand>();
+        services.AddScoped<IUpdateHospitalCommand, UpdateHospitalCommand>();
+        services.AddScoped<IDeleteHospitalCommand, DeleteHospitalCommand>();
+        services.AddScoped<IGetHospitalQuery, GetHospitalQuery>();
+        services.AddScoped<IGetAllHospitalQuery, GetAllHospitalQuery>();
     }
 }

@@ -45,7 +45,8 @@ public class MapperService : IMapperService
             new UserProfile(),
             new JwtTokenProfile(),
             new SpecialityProfile(),
-            new DoctorProfile()
+            new DoctorProfile(),
+            new HospitalProfile(),
         };
     }
 }
