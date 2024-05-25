@@ -7,10 +7,8 @@ namespace Blazor.Project.WebApp.Shared.Services;
 
 public class ApiIntegrationService(IHttpClientFactory httpClientFactory) : IApiIntegrationService
 {
-    public HttpResponseMessage ExecuteRequest(HttpMethod httpMethod, string url, string? requestBody = null, Dictionary<string, string>? queryParams = null)
+    public async Task<HttpResponseMessage> ExecuteRequest(HttpMethod httpMethod, string url, string? requestBody = null, Dictionary<string, string>? queryParams = null)
     {
-        string responseBody;
-
         using var client = httpClientFactory.CreateClient("API");
         try
         {
@@ -22,7 +20,7 @@ public class ApiIntegrationService(IHttpClientFactory httpClientFactory) : IApiI
             if (httpMethod == HttpMethod.Post || httpMethod == HttpMethod.Put)
                 request.Content = new StringContent(requestBody ?? string.Empty, Encoding.UTF8, "application/json");
 
-            var response = client.SendAsync(request).Result;
+            var response = await client.SendAsync(request);
             return response;
         }
         catch (Exception exception)
@@ -37,10 +35,10 @@ public class ApiIntegrationService(IHttpClientFactory httpClientFactory) : IApiI
         
     }
 
-    public string ExecuteRequestResponseBody(HttpMethod httpMethod, string url, string? requestBody, Dictionary<string, string>? queryParams)
+    public async Task<string> ExecuteRequestResponseBody(HttpMethod httpMethod, string url, string? requestBody, Dictionary<string, string>? queryParams)
     {
-        var response = ExecuteRequest(httpMethod, url, requestBody, queryParams);
-        var responseBody = response.Content.ReadAsStringAsync().Result; 
+        var response = await ExecuteRequest(httpMethod, url, requestBody, queryParams);
+        var responseBody = await response.Content.ReadAsStringAsync(); 
         response.EnsureSuccessStatusCode();
         return responseBody;
     }
@@ -63,11 +61,11 @@ public class ApiIntegrationService(IHttpClientFactory httpClientFactory) : IApiI
         return queryParams;
     }
 
-    public T? Deserializar<T>(string responseBody)
+    public T Deserializar<T>(string responseBody)
     {
         var settings = GetJsonSerializerOptions();
         var objetoDeserializado = JsonSerializer.Deserialize<T>(responseBody, settings);
-        return objetoDeserializado;
+        return objetoDeserializado ?? throw new Exception("Error when deserializing object");
     }
 
     private JsonSerializerOptions GetJsonSerializerOptions()

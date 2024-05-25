@@ -1,5 +1,3 @@
-using System.Text;
-using System.Text.Json;
 using Blazor.Project.WebApp.Shared.Services;
 using Blazor.Project.WebApp.User.Models;
 
@@ -10,7 +8,7 @@ public class UserService(IApiIntegrationService apiIntegrationService) : IUserSe
     public async Task<RegisterUserOutputModel?> Register(RegisterUserInputModel inputModel)
     {
         var requestBody = apiIntegrationService.SerializarBody(inputModel);
-        var  responseMessage = apiIntegrationService.ExecuteRequest(HttpMethod.Post, "user", requestBody);
+        var  responseMessage = await apiIntegrationService.ExecuteRequest(HttpMethod.Post, "user", requestBody);
 
         if (responseMessage.IsSuccessStatusCode)
             return new RegisterUserOutputModel();
