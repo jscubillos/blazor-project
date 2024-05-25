@@ -1,5 +1,7 @@
 ﻿@page "/doctors"
+@using Blazor.Project.WebApp.Doctor.Models
 @inject HttpClient Http
+@inject IDoctorService DoctorService
 
 <PageTitle>Doctors</PageTitle>
 
@@ -39,20 +41,11 @@ else
 }
 
 @code {
-    private Doctor[]? _doctors;
+    private List<GetDoctorOutputModel>? _doctors;
 
     protected override async Task OnInitializedAsync()
     {
-        _doctors = await Http.GetFromJsonAsync<Doctor[]>("sample-data/doctors.json");
-    }
-
-    public class Doctor
-    {
-        public required int Id { get; set; }
-
-        public required string Name { get; set; }
-
-        public required string Speciality { get; set; }
+        _doctors = await DoctorService.GetAll() ;
     }
 
 }

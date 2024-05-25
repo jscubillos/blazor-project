@@ -1,5 +1,6 @@
 ﻿@page "/hospitals"
-@inject HttpClient Http
+@using Blazor.Project.WebApp.Hospital.Models
+@inject IHospitalService HospitalService
 
 <PageTitle>Hospitals</PageTitle>
 
@@ -37,17 +38,10 @@ else
 }
 
 @code {
-    private Hospital[]? _hospitals;
+    private List<GetHospitalOutputModel>? _hospitals;
 
     protected override async Task OnInitializedAsync()
     {
-        _hospitals = await Http.GetFromJsonAsync<Hospital[]>("/hospital/all");
-    }
-
-    public class Hospital
-    {
-        public required int Id { get; set; }
-
-        public required string Name { get; set; }
+        _hospitals = await HospitalService.GetAll() ;
     }
 }

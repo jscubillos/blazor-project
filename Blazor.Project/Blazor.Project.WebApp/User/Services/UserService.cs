@@ -10,7 +10,7 @@ public class UserService(IApiIntegrationService apiIntegrationService) : IUserSe
         var requestBody = apiIntegrationService.SerializarBody(inputModel);
         var  responseMessage = await apiIntegrationService.ExecuteRequest(HttpMethod.Post, "user", requestBody);
 
-        if (responseMessage.IsSuccessStatusCode)
+        if (!responseMessage.IsSuccessStatusCode)
             return new RegisterUserOutputModel();
         
         var responseBody =  responseMessage.Content.ReadAsStringAsync().Result;
