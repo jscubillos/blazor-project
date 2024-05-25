@@ -1,21 +1,21 @@
 using System.Text;
 using System.Text.Json;
+using Blazor.Project.WebApp.Shared.Services;
 using Blazor.Project.WebApp.User.Models;
 
 namespace Blazor.Project.WebApp.User.Services;
 
-public class UserService(IHttpClientFactory httpClientFactory) : IUserService
+public class UserService(IApiIntegrationService apiIntegrationService) : IUserService
 {
     public async Task<RegisterUserOutputModel?> Register(RegisterUserInputModel inputModel)
     {
-        var httpClient = httpClientFactory.CreateClient("API");
-        var loginModelJson = JsonSerializer.Serialize(inputModel);
-        var requestContent = new StringContent(loginModelJson, Encoding.UTF8, "application/json");
+        var requestBody = apiIntegrationService.SerializarBody(inputModel);
+        var  responseMessage = apiIntegrationService.ExecuteRequest(HttpMethod.Post, "user", requestBody);
 
-        var responseMessage = await httpClient.PostAsync("user", requestContent);
-        if (!responseMessage.IsSuccessStatusCode)
-            return JsonSerializer.Deserialize<RegisterUserOutputModel>(await responseMessage.Content.ReadAsStringAsync(), new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+        if (responseMessage.IsSuccessStatusCode)
+            return new RegisterUserOutputModel();
         
-        return new RegisterUserOutputModel();
+        var responseBody =  responseMessage.Content.ReadAsStringAsync().Result;
+        return apiIntegrationService.Deserializar<RegisterUserOutputModel>(responseBody);
     }
 }
