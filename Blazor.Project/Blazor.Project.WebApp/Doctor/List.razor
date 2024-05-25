@@ -1,0 +1,58 @@
+﻿@page "/doctors"
+@inject HttpClient Http
+
+<PageTitle>Doctors</PageTitle>
+
+<h1>Doctors</h1>
+
+<p>Find doctors already registered in our database.</p>
+
+@if (_doctors == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Speciality</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var doctor in _doctors)
+        {
+            <tr>
+                <td>@doctor.Id</td>
+                <td>@doctor.Name</td>
+                <td>@doctor.Speciality</td>
+                <td></td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private Doctor[]? _doctors;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _doctors = await Http.GetFromJsonAsync<Doctor[]>("sample-data/doctors.json");
+    }
+
+    public class Doctor
+    {
+        public required int Id { get; set; }
+
+        public required string Name { get; set; }
+
+        public required string Speciality { get; set; }
+    }
+
+}

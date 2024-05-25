@@ -1,0 +1,68 @@
+@page "/user/register"
+@using Blazor.Project.WebApp.User.Models
+@inject IUserService UserService
+@inject NavigationManager NavigationManager
+
+@if (_showErrors)
+{
+<Message Text="@_error" Class="error-message btn-btn alert-danger" />
+}
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">Register User</h3>
+        <EditForm Model="_inputModel" OnValidSubmit="HandleCreateUser">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <div class="form-group mt-2">
+                <label for="name">Name</label>
+                <InputText id="name" placeholder="Name is required" class="form-control" @bind-Value="_inputModel.Name" />
+                <ValidationMessage For="@(() => _inputModel.Name)" />
+            </div>
+            <div class="form-group mt-2">
+                <label for="email">Email</label>
+                <InputText id="email" placeholder="Email is required" class="form-control" @bind-Value="_inputModel.Email" />
+                <ValidationMessage For="@(() => _inputModel.Email)" />
+            </div>
+            <div class="form-group mt-2">
+                <label for="password">Password</label>
+                <InputText type="password" placeholder="Password is required" id="password" class="form-control" @bind-Value="_inputModel.Password" />
+                <ValidationMessage For="@(() => _inputModel.Password)" />
+            </div>
+            <div class="form-group mt-2">
+                <label for="confirm">Confirm Password</label>
+                <InputText type="password" placeholder="Confirm password is required" id="confirm" class="form-control" @bind-Value="_inputModel.ConfirmPassword" />
+                <ValidationMessage For="@(() => _inputModel.ConfirmPassword)" />
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Register</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    private readonly RegisterUserInputModel  _inputModel = new RegisterUserInputModel();
+    private bool _showErrors;
+    private string _error = string.Empty;
+
+    private async Task HandleCreateUser()
+    {
+        try
+        {
+            var result = await UserService.Register(_inputModel);
+            if (string.IsNullOrEmpty(result?.Message))
+            {
+                NavigationManager.NavigateTo("/login");
+            }
+            else
+            {
+                _error = result.Message;
+                _showErrors = true;
+            }
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+            _showErrors = true;
+        }
+    }
+}

@@ -1,0 +1,53 @@
+﻿@page "/hospitals"
+@inject HttpClient Http
+
+<PageTitle>Hospitals</PageTitle>
+
+<h1>Hospitals</h1>
+
+<p>Find hospitals already registered in our database.</p>
+
+@if (_hospitals == null)
+{
+<p>
+    <em>Loading...</em>
+</p>
+}
+else
+{
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var hospital in _hospitals)
+    {
+    <tr>
+        <td>@hospital.Id</td>
+        <td>@hospital.Name</td>
+        <td></td>
+    </tr>
+    }
+    </tbody>
+</table>
+}
+
+@code {
+    private Hospital[]? _hospitals;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _hospitals = await Http.GetFromJsonAsync<Hospital[]>("/hospital/all");
+    }
+
+    public class Hospital
+    {
+        public required int Id { get; set; }
+
+        public required string Name { get; set; }
+    }
+}

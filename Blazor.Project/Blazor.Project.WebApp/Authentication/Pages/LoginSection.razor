@@ -1,0 +1,11 @@
+<CascadingAuthenticationState>
+    <AuthorizeView>
+        <Authorized>
+            @context?.User?.Claims?.FirstOrDefault(c => c.Type == "unique_name")?.Value.ToString()
+            <a href="Logout">Logout</a>
+        </Authorized>
+        <NotAuthorized>
+            <a href="Login">Login</a>
+        </NotAuthorized>
+    </AuthorizeView>
+</CascadingAuthenticationState>
