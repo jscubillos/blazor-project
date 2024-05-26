@@ -1,0 +1,86 @@
+@page "/hospitals/edit/{Id}"
+@inject IHospitalService HospitalService
+@inject NavigationManager NavigationManager
+
+<h3>Edit Hospital</h3>
+
+@if (_hospital == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <EditForm Model="@_hospital" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <InputText id="name" class="form-control" @bind-Value="_hospital.Name" />
+            <ValidationMessage For="@(() => _hospital.Name)" />
+        </div>
+        
+        <div class="form-group">
+            <label for="street">Street:</label>
+            <InputText id="street" class="form-control" @bind-Value="_hospital.Street" />
+            <ValidationMessage For="@(() => _hospital.Street)" />
+        </div>
+        
+        <div class="form-group">
+            <label for="city">City:</label>
+            <InputText id="city" class="form-control" @bind-Value="_hospital.City" />
+            <ValidationMessage For="@(() => _hospital.City)" />
+        </div>
+        
+        <div class="form-group">
+            <label for="state">State:</label>
+            <InputText id="state" class="form-control" @bind-Value="_hospital.State" />
+            <ValidationMessage For="@(() => _hospital.State)" />
+        </div>
+        
+        <div class="form-group">
+            <label for="zipCode">Zip Code:</label>
+            <InputText id="zipCode" class="form-control" @bind-Value="_hospital.ZipCode" />
+            <ValidationMessage For="@(() => _hospital.ZipCode)" />
+        </div>
+        
+        <br />
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <button type="button" class="btn btn-secondary" @onclick="Cancel">Cancel</button>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public required string Id { get; set; }
+    private HospitalInputModel? _hospital;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var hospitalData = await HospitalService.GetById(int.Parse(Id));
+        if (hospitalData == null)
+            NavigationManager.NavigateTo("/hospitals");
+        
+        _hospital = new HospitalInputModel
+        {
+            Id = hospitalData!.Id,
+            Name = hospitalData.Name,
+            Street = hospitalData.Street,
+            City = hospitalData.City,
+            State = hospitalData.State,
+            ZipCode = hospitalData.ZipCode
+        };
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        await HospitalService.Update(_hospital!);
+        NavigationManager.NavigateTo("/hospitals");
+    }
+    
+    private void Cancel()
+    {
+        NavigationManager.NavigateTo("/hospitals");
+    }
+}

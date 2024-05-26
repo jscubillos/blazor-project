@@ -1,5 +1,5 @@
 ﻿@page "/hospitals"
-@using Blazor.Project.WebApp.Hospital.Models
+@inject NavigationManager NavigationManager
 @inject IHospitalService HospitalService
 
 <PageTitle>Hospitals</PageTitle>
@@ -7,6 +7,10 @@
 <h1>Hospitals</h1>
 
 <p>Find hospitals already registered in our database.</p>
+
+<div class="text-right">
+    <button class="btn btn-primary" @onclick="NavigateToRegister">Adicionar</button>
+</div>
 
 @if (_hospitals == null)
 {
@@ -30,7 +34,10 @@ else
     <tr>
         <td>@hospital.Id</td>
         <td>@hospital.Name</td>
-        <td></td>
+        <td>
+            <button class="btn btn-primary" @onclick="() => NavigateToEdit(hospital.Id)">Edit</button>
+            <button class="btn btn-danger" @onclick="() => DeleteHospital(hospital.Id)">Delete</button>
+        </td>
     </tr>
     }
     </tbody>
@@ -43,5 +50,21 @@ else
     protected override async Task OnInitializedAsync()
     {
         _hospitals = await HospitalService.GetAll() ;
+    }
+    
+    private void NavigateToRegister()
+    {
+        NavigationManager.NavigateTo("/hospitals/register");
+    }
+    
+    private void NavigateToEdit(int id)
+    {
+        NavigationManager.NavigateTo($"/hospitals/edit/{id}");
+    }
+
+    private async Task DeleteHospital(int id)
+    {
+        await HospitalService.Delete(id);
+        _hospitals = await HospitalService.GetAll();
     }
 }

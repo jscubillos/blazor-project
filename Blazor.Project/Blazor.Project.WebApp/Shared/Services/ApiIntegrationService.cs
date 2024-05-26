@@ -2,6 +2,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Web;
+using Blazor.Project.WebApp.Shared.Models;
 
 namespace Blazor.Project.WebApp.Shared.Services;
 
@@ -68,7 +69,14 @@ public class ApiIntegrationService(IHttpClientFactory httpClientFactory) : IApiI
         return objetoDeserializado ?? throw new Exception("Error when deserializing object");
     }
 
-    private JsonSerializerOptions GetJsonSerializerOptions()
+    public ApplicationException HandleException(HttpResponseMessage responseMessage)
+    {
+        var responseBodyError = responseMessage.Content.ReadAsStringAsync().Result;
+        var error = Deserializar<ErrorMessage>(responseBodyError);
+        throw new ApplicationException(error.Message);   
+    }
+
+    private static JsonSerializerOptions GetJsonSerializerOptions()
     {
         return new JsonSerializerOptions()
         { 
@@ -76,16 +84,13 @@ public class ApiIntegrationService(IHttpClientFactory httpClientFactory) : IApiI
         };
     }
 
-    private string GetUrlQueryParams(string url, Dictionary<string, string> queryParams)
+    private static string GetUrlQueryParams(string url, Dictionary<string, string> queryParams)
     {
-        var builder = new UriBuilder(url);
-        var query = HttpUtility.ParseQueryString(builder.Query, Encoding.UTF8);
+        var query = HttpUtility.ParseQueryString(string.Empty, Encoding.UTF8);
         foreach (var param in queryParams)
-        {
             query[param.Key] = param.Value;
-        }
-        builder.Query = query.ToString();
-        url = builder.ToString();
+        
+        url += $"?{query}";
         return url;
     }
 }

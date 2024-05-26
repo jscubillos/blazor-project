@@ -7,4 +7,5 @@ public interface IApiIntegrationService
     Dictionary<string, string>? SerializarQueryParameters(object objeto);
 
     T Deserializar<T>(string responseBody);
+    ApplicationException HandleException(HttpResponseMessage responseMessage);
 }

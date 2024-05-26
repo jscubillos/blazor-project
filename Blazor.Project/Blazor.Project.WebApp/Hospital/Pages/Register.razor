@@ -1,0 +1,62 @@
+@page "/hospitals/register"
+@inject IHospitalService HospitalService
+@inject NavigationManager NavigationManager
+
+<h3>Register Hospital</h3>
+
+@if (_showErrors)
+{
+<Message Text="@_error" Class="error-message btn-btn alert-danger" />
+}
+<EditForm Model="@_inputModel" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <InputText id="name" class="form-control" @bind-Value="_inputModel.Name" />
+        <ValidationMessage For="@(() => _inputModel.Name)" />
+    </div>
+    <div class="form-group">
+        <label for="street">Street:</label>
+        <InputText id="street" class="form-control" @bind-Value="_inputModel.Street" />
+        <ValidationMessage For="@(() => _inputModel.Street)" />
+    </div>
+    <div class="form-group">
+        <label for="city">City:</label>
+        <InputText id="city" class="form-control" @bind-Value="_inputModel.City" />
+        <ValidationMessage For="@(() => _inputModel.City)" />
+    </div>
+    <div class="form-group">
+        <label for="state">State:</label>
+        <InputText id="state" class="form-control" @bind-Value="_inputModel.State" />
+        <ValidationMessage For="@(() => _inputModel.State)" />
+    </div>
+    <div class="form-group">
+        <label for="zipCode">Zip Code:</label>
+        <InputText id="zipCode" class="form-control" @bind-Value="_inputModel.ZipCode" />
+        <ValidationMessage For="@(() => _inputModel.ZipCode)" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Register</button>
+</EditForm>
+
+@code {
+    private readonly HospitalInputModel _inputModel = new HospitalInputModel();
+    private bool _showErrors;
+    private string _error = string.Empty;
+    
+    private async void HandleValidSubmit()
+    {
+        try
+        {
+            await HospitalService.Register(_inputModel);
+            NavigationManager.NavigateTo("/hospitals");
+        }
+        catch (Exception ex)
+        {
+            _error = ex.Message;
+            _showErrors = true;
+        }
+    }
+}
