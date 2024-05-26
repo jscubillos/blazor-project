@@ -1,6 +1,7 @@
 ﻿@page "/hospitals"
 @inject NavigationManager NavigationManager
 @inject IHospitalService HospitalService
+@inject ToastService ToastService
 
 <PageTitle>Hospitals</PageTitle>
 
@@ -65,6 +66,7 @@ else
     private async Task DeleteHospital(int id)
     {
         await HospitalService.Delete(id);
+        ToastService.Notify(new(ToastType.Success, $"Hospital deleted successfully."));
         _hospitals = await HospitalService.GetAll();
     }
 }

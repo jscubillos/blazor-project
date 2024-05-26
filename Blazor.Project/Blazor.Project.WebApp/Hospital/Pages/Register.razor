@@ -1,6 +1,7 @@
 @page "/hospitals/register"
 @inject IHospitalService HospitalService
 @inject NavigationManager NavigationManager
+@inject ToastService ToastService
 
 <h3>Register Hospital</h3>
 
@@ -51,6 +52,7 @@
         try
         {
             await HospitalService.Register(_inputModel);
+            ToastService.Notify(new(ToastType.Success, $"Hospital registed successfully."));
             NavigationManager.NavigateTo("/hospitals");
         }
         catch (Exception ex)

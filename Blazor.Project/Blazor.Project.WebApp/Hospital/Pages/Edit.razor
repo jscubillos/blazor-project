@@ -1,6 +1,7 @@
 @page "/hospitals/edit/{Id}"
 @inject IHospitalService HospitalService
 @inject NavigationManager NavigationManager
+@inject ToastService ToastService
 
 <h3>Edit Hospital</h3>
 
@@ -76,6 +77,7 @@ else
     private async Task HandleValidSubmit()
     {
         await HospitalService.Update(_hospital!);
+        ToastService.Notify(new(ToastType.Success, $"Hospital updated successfully."));
         NavigationManager.NavigateTo("/hospitals");
     }
     

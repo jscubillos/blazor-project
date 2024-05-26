@@ -4,5 +4,5 @@ namespace Blazor.Project.WebApp.User.Services;
 
 public interface IUserService
 {
-    Task<RegisterUserOutputModel?> Register(RegisterUserInputModel inputModel);
+    Task Register(RegisterUserInputModel inputModel);
 }

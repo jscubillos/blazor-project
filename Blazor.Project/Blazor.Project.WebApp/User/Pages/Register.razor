@@ -2,6 +2,7 @@
 @using Blazor.Project.WebApp.User.Models
 @inject IUserService UserService
 @inject NavigationManager NavigationManager
+@inject ToastService ToastService
 
 @if (_showErrors)
 {
@@ -48,16 +49,9 @@
     {
         try
         {
-            var result = await UserService.Register(_inputModel);
-            if (string.IsNullOrEmpty(result?.Message))
-            {
-                NavigationManager.NavigateTo("/login");
-            }
-            else
-            {
-                _error = result.Message;
-                _showErrors = true;
-            }
+            await UserService.Register(_inputModel);
+            ToastService.Notify(new(ToastType.Success, $"User registed successfully."));
+            NavigationManager.NavigateTo("/login");
         }
         catch (Exception ex)
         {
